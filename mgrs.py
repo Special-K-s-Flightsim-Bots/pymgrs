@@ -353,8 +353,7 @@ def decode(mgrsString):
 	match = pattern.match(mgrsString)
 
 	if match:
-		sb = match.group(1)
-		print "sb", sb
+		sb = match.group(1)		
 		i = len(sb)
 
 		if i > 2:
@@ -362,17 +361,8 @@ def decode(mgrsString):
 	else:
 		raise ValueError("MGRSPoint bad conversion from: " + mgrsString)  
 
-	'''
-	while not (/[A-Z]/).test(testChar = mgrsString.charAt(i)):
-		if i >= 2:
-			raise ValueError("MGRSPoint bad conversion from: " + mgrsString)  
-		sb += testChar
-		i += 1
-	'''	
-
 
 	zoneNumber = int(sb)
-	print "zoneNumber:", zoneNumber
 
 	if i is 0 or i + 3 > length:
 	    # A good MGRS string has to be 4-5 digits long,
@@ -381,7 +371,6 @@ def decode(mgrsString):
 
 	
 	zoneLetter = mgrsString[i]
-	print "zoneLetter", zoneLetter
 	i += 1
 	
 
@@ -392,7 +381,6 @@ def decode(mgrsString):
 
 	#hunK = mgrsString.substring(i, i += 2)
 	hunK = mgrsString[i:i+2]
-	print "hunK", hunK
 	i += 2
 
 	set = get100kSetForZone(zoneNumber)
@@ -412,15 +400,12 @@ def decode(mgrsString):
 
 	# calculate the char index for easting/northing separator
 	remainder = length - i
-	print "remainder", remainder
-	print mgrsString[-remainder:]
-
+	
 	if remainder % 2 is not 0:
 		raise ValueError("MGRSPoint has to have an even number \nof digits after the zone letter and two 100km letters - front \nhalf for easting meters, second half for \nnorthing meters" + mgrsString)
 
 
 	sep = remainder / 2
-	print "sep", sep
 
 	sepEasting = 0.0
 	sepNorthing = 0.0
@@ -431,7 +416,6 @@ def decode(mgrsString):
 		sepEastingString = mgrsString[i:i + sep]
 		sepEasting = float(sepEastingString) * accuracyBonus
 		sepNorthingString = mgrsString[i + sep:]
-		print "sepNorthingString", sepNorthingString
 		sepNorthing = float(sepNorthingString) * accuracyBonus
 
 
@@ -454,8 +438,7 @@ def decode(mgrsString):
  * @return {number} The easting value for the given letter and set.
 """
 def getEastingFromChar(e, set):
-	print "e", e
-	print "set", set
+	
 	# colOrigin is the letter at the origin of the set for the
 	# column
 	#curCol = SET_ORIGIN_COLUMN_LETTERS.charCodeAt(set - 1)
@@ -656,13 +639,39 @@ def UTMtoLL(utm):
 	return result
 
 
+""""
+ * LLtoMGRS converts Latitude, Longtitude value to MGRS string.
+ *
+ * @private
+ * @param {number} lat northing
+ * @param {number} lon easting
+ * @param {number} accuracy Accuracy in digits (1-5).
+ * @return {string} MGRS string for the given geographic location.
+"""
+def LLtoMGRS(lat, lon):
+	return encode(LLtoUTM(lat, lon), 5)
 
+
+""""
+ * MGRStoLL a MGRS string to geographic coordinate (Latitude, Longtitude)
+ *
+ * @private
+ * @param {number} lat northing
+ * @param {number} lon easting
+ * @param {number} accuracy Accuracy in digits (1-5).
+ * @return {number}, {number} latitude, longitude for a given MGRS location.
+"""
+def MGRStoLL(mgrsString):
+	return UTMtoLL(decode(mgrsString))
 
 if __name__ == '__main__':
-    print(getMinNorthing('T'))
-    print(LLtoUTM(37.65398996452414, 44.00628471597047))
-    print(encode(LLtoUTM(37.65398996452414, 44.00628471597047),5))
-    print(UTMtoLL(decode("38SMG12345678")))
+    #print(getMinNorthing('T'))
+    #print(LLtoUTM(37.65398996452414, 44.00628471597047))
+    #print(encode(LLtoUTM(37.65398996452414, 44.00628471597047),5))
+    #print(UTMtoLL(decode("38SMG12345678")))
+
+    print(LLtoMGRS(40, 30))
+    print(MGRStoLL("38SLL1234567890"))
 
     
 
