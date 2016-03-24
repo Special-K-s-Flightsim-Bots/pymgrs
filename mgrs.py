@@ -292,13 +292,13 @@ def getLetter100kID(column, row, parm):
 		colInt = colInt - Z + A - 1
 		rollover = True
 
-	if colInt is I or (colOrigin < I and colInt > I) or ((colInt > I or colOrigin < I) and rollover):
+	if (colInt == I or (colOrigin < I and colInt > I) or ((colInt > I or colOrigin < I) and rollover)):
 		colInt += 1
 
-	if colInt is O or (colOrigin < O and colInt > O) or ((colInt > O or colOrigin < O) and rollover):
+	if (colInt == O or (colOrigin < O and colInt > O) or ((colInt > O or colOrigin < O) and rollover)):
 		colInt += 1
 
-	if colInt is I:
+	if colInt == I:
 		colInt += 1
 	
 	if colInt > Z:
@@ -310,13 +310,13 @@ def getLetter100kID(column, row, parm):
 	else:
 		rollover = False  
 
-	if ((rowInt is I) or ((rowOrigin < I) and (rowInt > I))) or (((rowInt > I) or (rowOrigin < I)) and rollover):
+	if (((rowInt == I) or ((rowOrigin < I) and (rowInt > I))) or (((rowInt > I) or (rowOrigin < I)) and rollover)):
 		rowInt += 1
 
-	if ((rowInt is O) or ((rowOrigin < O) and (rowInt > O))) or (((rowInt > O) or (rowOrigin < O)) and rollover):
+	if (((rowInt == O) or ((rowOrigin < O) and (rowInt > O))) or (((rowInt > O) or (rowOrigin < O)) and rollover)):
 		rowInt += 1
 
-	if rowInt is I:
+	if rowInt == I:
 		rowInt += 1
 
 	if rowInt > V:
