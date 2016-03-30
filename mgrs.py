@@ -54,7 +54,6 @@ def radToDeg(rad):
     return (180.0 * (rad / math.pi))
 
 
-
 """"
  * Converts a set of Longitude and Latitude co-ordinates to UTM
  * using the WGS84 ellipsoid.
@@ -83,7 +82,7 @@ def LLtoUTM(lat, lon):
 	ZoneNumber = math.floor((Long + 180) / 6) + 1
 
 	# Make sure the longitude 180.00 is in Zone 60
-	if Long is 180:
+	if Long == 180:
 		ZoneNumber = 60
 
 
@@ -253,7 +252,7 @@ def get100kID(easting, northing, zoneNumber):
 """
 def get100kSetForZone(i):
 	setParm = i % NUM_100K_SETS
-	if setParm is 0:
+	if setParm == 0:
 		setParm = NUM_100K_SETS
 
 	return setParm
@@ -336,7 +335,7 @@ def getLetter100kID(column, row, parm):
 """
 def decode(mgrsString):
 
-	if len(mgrsString) is 0:
+	if len(mgrsString) == 0:
 		raise ("MGRSPoint coverting from nothing")
 
 
@@ -364,7 +363,7 @@ def decode(mgrsString):
 
 	zoneNumber = int(sb)
 
-	if i is 0 or i + 3 > length:
+	if i == 0 or i + 3 > length:
 	    # A good MGRS string has to be 4-5 digits long,
 		# ##AAA/#AAA at least.
 		raise ValueError("MGRSPoint bad conversion from: " + mgrsString)
@@ -375,7 +374,7 @@ def decode(mgrsString):
 	
 
 	# Should we check the zone letter here? Why not.
-	if zoneLetter <= 'A' or zoneLetter is 'B' or zoneLetter is 'Y' or zoneLetter >= 'Z' or zoneLetter is 'I' or zoneLetter is 'O':
+	if zoneLetter <= 'A' or zoneLetter == 'B' or zoneLetter == 'Y' or zoneLetter >= 'Z' or zoneLetter == 'I' or zoneLetter == 'O':
 		raise ValueError("MGRSPoint zone letter " + zoneLetter + " not handled: " + mgrsString)
 
 
@@ -401,7 +400,7 @@ def decode(mgrsString):
 	# calculate the char index for easting/northing separator
 	remainder = length - i
 	
-	if remainder % 2 is not 0:
+	if remainder % 2 != 0:
 		raise ValueError("MGRSPoint has to have an even number \nof digits after the zone letter and two 100km letters - front \nhalf for easting meters, second half for \nnorthing meters" + mgrsString)
 
 
@@ -446,12 +445,12 @@ def getEastingFromChar(e, set):
 	eastingValue = 100000.0
 	rewindMarker = False
 
-  	while curCol is not ord(e[0]):
+  	while curCol != ord(e[0]):
 		curCol+=1
-		if curCol is I:
+		if curCol == I:
 				curCol+=1
 
-		if curCol is O:
+		if curCol == O:
 				curCol+=1
 
 		if curCol > Z:
@@ -496,12 +495,12 @@ def getNorthingFromChar(n, set):
     northingValue = 0.0
     rewindMarker = False
 
-    while curRow is not ord(n[0]):
+    while curRow != ord(n[0]):
         curRow += 1
-        if curRow is I:
+        if curRow == I:
             curRow += 1
 
-        if curRow is O:
+        if curRow == O:
             curRow += 1
 
         # fixing a bug making whole application hang in this loop
@@ -670,7 +669,7 @@ if __name__ == '__main__':
     #print(encode(LLtoUTM(37.65398996452414, 44.00628471597047),5))
     #print(UTMtoLL(decode("38SMG12345678")))
 
-    print(LLtoMGRS(40, 30))
+    print(LLtoMGRS(39.84389877319336, 29.5625991821))
     print(MGRStoLL("38SLL1234567890"))
 
     
