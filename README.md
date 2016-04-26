@@ -1,5 +1,5 @@
 # pymgrs
-Pure Pyhon MGRS coordinate converter.
+Pure Python MGRS coordinate converter.
 
 This is a python port of javascipt utiliy for converting between WGS84 lat/lng and MGRS coordinates. Which can be found at https://github.com/proj4js/mgrs
 
