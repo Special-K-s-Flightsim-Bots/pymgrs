@@ -424,9 +424,9 @@ def decode(mgrsString):
     if sep > 0:
         accuracyBonus = 100000.0 / math.pow(10, sep)
         # sepEastingString = mgrsString.substring(i, i + sep)
-        sepEastingString = mgrsString[i:i + sep]
+        sepEastingString = mgrsString[i:int(i + sep)]
         sepEasting = float(sepEastingString) * accuracyBonus
-        sepNorthingString = mgrsString[i + sep:]
+        sepNorthingString = mgrsString[int(i + sep):]
         sepNorthing = float(sepNorthingString) * accuracyBonus
 
     easting = sepEasting + east100k
