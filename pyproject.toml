@@ -1,0 +1,33 @@
+[build-system]
+requires = [
+  "setuptools>=64",
+  "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymgrs"
+version = "0.1.0"
+description = "Pure Python MGRS coordinate converter."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+authors = [
+  { name = "aydink" }
+]
+keywords = ["MGRS", "UTM", "WGS84", "coordinates", "geodesy"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: GIS"
+]
+
+[tool.setuptools]
+py-modules = ["mgrs"]
